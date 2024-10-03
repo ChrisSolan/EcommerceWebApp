@@ -57,6 +57,25 @@ router.post('/login', async (req: Request, res: Response) => {
     }
 });
 
+router.delete('/:userID', async(req: Request, res: Response) => {
+    try {
+        const {userID} = req.params;
+        const response = await prisma.user.delete({
+            where: {
+                id: userID
+            }
+        });
+        if (!response) { return res.status(404).json({ message: "User NOT FOUND!" }); }
+        res.json(response);
+    } catch (err) {
+        res.json(err);
+    }
+
+
+
+
+});
+
 /* uncomment when using User Auth in the frontend
 const verifyToken = (req, res, next) => {
     const token = req.headers.authorization;
