@@ -33,9 +33,10 @@ model Order {
 
 //make a model for ShoppingItems
 model ShoppingItem {
-  id    String @id @default(uuid())
-  name  String
-  price Float
+  id      String @id @default(uuid())
+  name    String
+  price   Float
+  itemImg String
 
   orders Order[] @relation("OrderItems") //'OrderItems' is a label
 }

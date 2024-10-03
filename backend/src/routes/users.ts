@@ -57,7 +57,7 @@ router.post('/login', async (req: Request, res: Response) => {
     }
 });
 
-/*
+/* uncomment when using User Auth in the frontend
 const verifyToken = (req, res, next) => {
     const token = req.headers.authorization;
     if (token) {
