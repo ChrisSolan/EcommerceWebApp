@@ -35,10 +35,11 @@ model Order {
 
 //make a model for ShoppingItems
 model ShoppingItem {
-  id      String @id @default(uuid())
-  name    String
-  price   Float
-  itemImg String
+  id        String @id @default(uuid())
+  name      String
+  dealPrice Float? //might have to make a @default(0) if migrations error occur. ? because its optional, an item might be on a deal or not
+  price     Float
+  itemImg   String
 
   orders Order[] @relation("OrderItems") //'OrderItems' is a label, many orders can have this shopping Item
 
