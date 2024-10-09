@@ -17,6 +17,7 @@ model User {
   id           String         @id @default(uuid())
   username     String         @unique
   password     String
+  balance      Int            @default(0)
   orders       Order[] //one-to-many, a user can have multiple orders but an order can only have one user
   shoppingCart ShoppingItem[] @relation("cart") // many-to-many relation with shopping items for the shopping cart
 }
