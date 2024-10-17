@@ -3,19 +3,24 @@ import {Home} from './pages/home.tsx';
 import {Deals} from './pages/deals.tsx';
 import {Navbar} from './navbar.tsx';
 import { Auth } from './pages/auth.tsx';
+import {ShoppingCart} from './pages/shoppingCart.tsx';
+import { ShoppingProvider } from './contexts/shoppingContext.tsx';
+
 function App() {
   return (
-    <div className="App">
-      <Router>
-        <Navbar/>
-        <Routes>
-          <Route path='/' element={<Home/>}/>
-          <Route path='/deals' element={<Deals/>}/>
-          <Route path='/auth' element={<Auth/>}/>
-        </Routes>
-      </Router>
-
-    </div>
+    <ShoppingProvider>
+      <div className="App">
+        <Router>
+          <Navbar/>
+          <Routes>
+            <Route path='/' element={<Home/>}/>
+            <Route path='/deals' element={<Deals/>}/>
+            <Route path='/auth' element={<Auth/>}/>
+            <Route path='/cart' element={<ShoppingCart/>}/>
+          </Routes>
+        </Router>
+      </div>
+    </ShoppingProvider>
   );
 }
 

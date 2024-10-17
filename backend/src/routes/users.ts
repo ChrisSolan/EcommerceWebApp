@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const router = express.Router();
 const jwtToken = process.env.JWT_SECRET;
 import { PrismaClient } from '@prisma/client';
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 const prisma = new PrismaClient();
 
 router.post('/register', async (req: Request, res: Response) => {
@@ -76,17 +76,14 @@ router.delete('/:userID', async(req: Request, res: Response) => {
 
 });
 
-/* uncomment when using User Auth in the frontend
-const verifyToken = (req, res, next) => {
+const verifyToken = (req: Request, res: Response, next: NextFunction) => {
     const token = req.headers.authorization;
     if (token) {
-        jwt.verify(token, jwtToken, (err) => {
+        jwt.verify(token, jwtToken, (err: Error) => {
             if (err) return res.sendStatus(403); //user is NOT verified
             next();
         });
     } else { res.sendStatus(401); } //no token to verify, user is NOT verified
 }
-*/
 
-//module.exports = {userRouter: router, verifyToken: verifyToken};
-module.exports = {userRouter: router};
+module.exports = {userRouter: router, verifyToken: verifyToken};

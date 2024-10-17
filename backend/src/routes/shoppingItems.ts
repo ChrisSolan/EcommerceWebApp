@@ -2,12 +2,10 @@ const express = require('express');
 const router = express.Router();
 import { PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
-import { connect } from 'http2';
 const prisma = new PrismaClient();
-//const { verifyToken } = require('./users.js');
+const { verifyToken } = require('./users.ts');
 
-//route to create a shopping item, add verifyToken to the parameters later
-router.post('/', async (req: Request, res: Response) => {
+router.post('/', verifyToken, async (req: Request, res: Response) => {
     try {
         const shoppingItem = await prisma.shoppingItem.create({
             data: req.body
@@ -28,10 +26,10 @@ router.get('/', async (req: Request, res: Response) => {
     }
 });
 
-//route to add a shopping item to your shopping cart //add verifyToken back to the parameters
+//route to add a shopping item to your shopping cart
     //Needs a shoppingItemID and userID in the request body
     
-router.put('/cart', async (req: Request, res: Response) => {
+router.put('/cart', verifyToken, async (req: Request, res: Response) => {
     try {
         const {userID, shoppingItemID} = req.body;
 
