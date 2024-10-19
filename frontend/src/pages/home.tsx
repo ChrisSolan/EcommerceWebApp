@@ -27,7 +27,7 @@ export const Home = () => {
                 userID,
                 shoppingItemID 
             },
-            {headers: { authorization: cookies.access_token } }
+            {headers: { authorization: cookies.access_token } } //you have to be logged in to add items to your cart
         );
         const cartItem = shoppingItems.find(item => item.id === shoppingItemID); //returns the shoppingItem if it is found
         if (cartItem) {

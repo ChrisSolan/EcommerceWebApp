@@ -1,7 +1,7 @@
 import { useShoppingContext } from "../contexts/shoppingContext"
 
 export const ShoppingCart = () => {
-    const { cartItems, removeCartItem } = useShoppingContext();
+    const { cartItems, removeCartItem, cartTotal } = useShoppingContext();
 
     const handleRemove = (shoppingItemID: string) => {
         const cartItem = cartItems.find(item => item.id === shoppingItemID); //returns the shoppingItem if it is found
@@ -24,6 +24,8 @@ export const ShoppingCart = () => {
                     </li>
                 ))}
             </ul>
+            <h3>Estimated Total: ${cartTotal}</h3>
+            <button>CHECKOUT</button>
         </div>
     )
 }

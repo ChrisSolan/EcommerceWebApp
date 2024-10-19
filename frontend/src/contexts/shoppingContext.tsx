@@ -14,6 +14,7 @@ interface ShoppingContextType {
     cartItems: ShoppingItem[];
     addCart: (item: ShoppingItem) => void;  //ShoppingItem is the type for item
     removeCartItem: (item: ShoppingItem) => void;
+    cartTotal: number;
     cartCount: number;
     
 }
@@ -24,6 +25,7 @@ const defaultShoppingContext: ShoppingContextType = {
     cartItems: [],
     addCart: () => {},
     removeCartItem: () => {},
+    cartTotal: 0,
     cartCount: 0
 }
 
@@ -34,19 +36,26 @@ const ShoppingContext = createContext<ShoppingContextType>(defaultShoppingContex
 export const ShoppingProvider = ({children}: {children: ReactNode}) => {
     //All states & functions defined in ShoppingContextType go here and what they should do and hold
     const [cartItems, setCartItems] = useState<ShoppingItem[]>([]);
+    const [cartTotal, setCartTotal] = useState(0);
     const addCart = (item: ShoppingItem) => {
         setCartItems(prevItems => [...prevItems, item]); //adds the new 'item' to the already existing array of items in the shopping cart
+        setCartTotal(cartTotal => cartTotal + item.price);
+        setCartTotal(cartTotal => Math.round(cartTotal * 100) / 100); //for rounding the decimals to 2 places
     }
+
 
     const removeCartItem = (cartItem: ShoppingItem) => {
         setCartItems(cartItems => {
             return cartItems.filter(item => item.id !== cartItem.id);
         });
+        setCartTotal( cartTotal => cartTotal - cartItem.price);
+        setCartTotal(cartTotal => Math.round(cartTotal * 100) / 100);
     }
+
     const cartCount = cartItems.length;
 
     return (
-        <ShoppingContext.Provider value={{cartItems, addCart, cartCount, removeCartItem}}>
+        <ShoppingContext.Provider value={{cartItems, addCart, cartCount, removeCartItem, cartTotal}}>
             {children}
         </ShoppingContext.Provider>
     );
