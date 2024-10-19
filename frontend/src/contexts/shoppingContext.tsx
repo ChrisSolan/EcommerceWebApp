@@ -13,14 +13,17 @@ export interface ShoppingItem {
 interface ShoppingContextType {
     cartItems: ShoppingItem[];
     addCart: (item: ShoppingItem) => void;  //ShoppingItem is the type for item
+    removeCartItem: (item: ShoppingItem) => void;
     cartCount: number;
     
 }
 
 //a default state for the shoppingContext, with empty arrays and functions
 const defaultShoppingContext: ShoppingContextType = {
+    // state and functions for the shopping cart
     cartItems: [],
     addCart: () => {},
+    removeCartItem: () => {},
     cartCount: 0
 }
 
@@ -34,10 +37,16 @@ export const ShoppingProvider = ({children}: {children: ReactNode}) => {
     const addCart = (item: ShoppingItem) => {
         setCartItems(prevItems => [...prevItems, item]); //adds the new 'item' to the already existing array of items in the shopping cart
     }
+
+    const removeCartItem = (cartItem: ShoppingItem) => {
+        setCartItems(cartItems => {
+            return cartItems.filter(item => item.id !== cartItem.id);
+        });
+    }
     const cartCount = cartItems.length;
 
     return (
-        <ShoppingContext.Provider value={{cartItems, addCart, cartCount}}>
+        <ShoppingContext.Provider value={{cartItems, addCart, cartCount, removeCartItem}}>
             {children}
         </ShoppingContext.Provider>
     );

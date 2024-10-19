@@ -4,7 +4,7 @@ import axios from "axios"
 import { useShoppingContext, ShoppingItem } from "../contexts/shoppingContext"
 
 export const Home = () => {
-    const { addCart, cartItems } = useShoppingContext();
+    const { addCart } = useShoppingContext();
     const [shoppingItems, setShoppingItems] = useState<ShoppingItem[]>([]);
     const [cookies ,] = useCookies(["access_token"]);
     const userID = window.localStorage.getItem("userID");
