@@ -9,11 +9,18 @@ export interface ShoppingItem {
     itemImg: string;
 }
 
+export interface OrdersType {
+    id: string;
+    createdAt: string;
+    shopperId: string;
+}
+
 //defines the types for states and functions included in the shopping context
 interface ShoppingContextType {
     cartItems: ShoppingItem[];
     addCart: (item: ShoppingItem) => void;  //ShoppingItem is the type for item
     removeCartItem: (item: ShoppingItem) => void;
+    resetCart: () => void;
     cartTotal: number;
     cartCount: number;
     
@@ -25,6 +32,7 @@ const defaultShoppingContext: ShoppingContextType = {
     cartItems: [],
     addCart: () => {},
     removeCartItem: () => {},
+    resetCart: () => {},
     cartTotal: 0,
     cartCount: 0
 }
@@ -52,10 +60,15 @@ export const ShoppingProvider = ({children}: {children: ReactNode}) => {
         setCartTotal(cartTotal => Math.round(cartTotal * 100) / 100);
     }
 
+    const resetCart = () => {
+        setCartItems([]);
+        setCartTotal(0);
+    }
+
     const cartCount = cartItems.length;
 
     return (
-        <ShoppingContext.Provider value={{cartItems, addCart, cartCount, removeCartItem, cartTotal}}>
+        <ShoppingContext.Provider value={{cartItems, addCart, cartCount, removeCartItem, cartTotal, resetCart}}>
             {children}
         </ShoppingContext.Provider>
     );

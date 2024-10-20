@@ -23,6 +23,11 @@ export const Home = () => {
 
     const handleAddCart = async (shoppingItemID: string) => {
         try {
+            if(!cookies.access_token) { 
+                alert('Login to add item to your shopping cart!');
+                return;
+            }
+            
             await axios.put('http://localhost:3010/shoppingItems/cart', {
                 userID,
                 shoppingItemID 

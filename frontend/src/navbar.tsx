@@ -18,6 +18,7 @@ export const Navbar = () => {
             <Link to= "/" className=''>Home</Link>
             <Link to="/deals" className=''>Deals</Link>
             <Link to="/cart" className=''>Cart ({cartCount})</Link>
+            <Link to="/orders" className=''>Orders</Link>
             {cookies.access_token ?  (
                 <button onClick={logout}>Logout</button>
             ): (

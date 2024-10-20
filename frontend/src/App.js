@@ -4,6 +4,7 @@ import {Deals} from './pages/deals.tsx';
 import {Navbar} from './navbar.tsx';
 import { Auth } from './pages/auth.tsx';
 import {ShoppingCart} from './pages/shoppingCart.tsx';
+import {Orders} from './pages/orders.tsx';
 import { ShoppingProvider } from './contexts/shoppingContext.tsx';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
             <Route path='/deals' element={<Deals/>}/>
             <Route path='/auth' element={<Auth/>}/>
             <Route path='/cart' element={<ShoppingCart/>}/>
+            <Route path='/orders' element={<Orders/>}/>
           </Routes>
         </Router>
       </div>

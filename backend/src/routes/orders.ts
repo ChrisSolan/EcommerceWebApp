@@ -3,9 +3,10 @@ const router = express.Router();
 import { PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
 const prisma = new PrismaClient();
+const { verifyToken } = require('./users.ts');
 
 //route to create an order, used whenever a shoppingItem is purchased in the frontend
-router.post('/', async (req: Request, res: Response) => {
+router.post('/', verifyToken, async (req: Request, res: Response) => {
     try {
         const { shopperId, items } = req.body; //frontend must send both a shopperId and items in the body
 
