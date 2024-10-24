@@ -31,6 +31,7 @@ const Login = () => {
 
             setCookies("access_token", response.data.token); //token stored in cookies
             window.localStorage.setItem("userID", response.data.userID); //userID stored in local storage
+            window.localStorage.setItem("username", username); //username stored in local storage
             navigate("/");
         } catch (err) {
             const error = err as AxiosError; //cast the error to Axios error so we have a type

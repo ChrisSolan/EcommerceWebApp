@@ -25,12 +25,16 @@ export const Orders = () => {
         <div>
             <h1>Test Orders Page</h1>
             <ul>
-            {orders.map(order => (
-                    <li key={order.id}>
-                        <h2>Order ID: {order.id}</h2>
-                        <h2>Order Placed: {order.createdAt}</h2>
-                    </li>
-                ))}
+                {orders.length > 0  ?  (
+                    orders.map(order => (
+                        <li key={order.id}>
+                            <h2>Order ID: {order.id}</h2>
+                            <h2>Order Placed: {order.createdAt}</h2>
+                        </li>
+                    ))
+                ) : (
+                    <p>No Orders Created!</p>
+                )}
             </ul>
         </div>
     )

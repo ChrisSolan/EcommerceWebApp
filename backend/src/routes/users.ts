@@ -7,6 +7,16 @@ import { PrismaClient } from '@prisma/client';
 import { Request, Response, NextFunction } from 'express';
 const prisma = new PrismaClient();
 
+const verifyToken = (req: Request, res: Response, next: NextFunction) => {
+    const token = req.headers.authorization;
+    if (token) {
+        jwt.verify(token, jwtToken, (err: Error) => {
+            if (err) return res.sendStatus(403); //user is NOT verified
+            next();
+        });
+    } else { res.sendStatus(401); } //no token to verify, user is NOT verified
+}
+
 router.post('/register', async (req: Request, res: Response) => {
     const {username, password} = req.body;
 
@@ -57,7 +67,7 @@ router.post('/login', async (req: Request, res: Response) => {
     }
 });
 
-router.delete('/:userID', async(req: Request, res: Response) => {
+router.delete('/:userID', verifyToken, async(req: Request, res: Response) => {
     try {
         const {userID} = req.params;
         const response = await prisma.user.delete({
@@ -75,15 +85,5 @@ router.delete('/:userID', async(req: Request, res: Response) => {
 
 
 });
-
-const verifyToken = (req: Request, res: Response, next: NextFunction) => {
-    const token = req.headers.authorization;
-    if (token) {
-        jwt.verify(token, jwtToken, (err: Error) => {
-            if (err) return res.sendStatus(403); //user is NOT verified
-            next();
-        });
-    } else { res.sendStatus(401); } //no token to verify, user is NOT verified
-}
 
 module.exports = {userRouter: router, verifyToken: verifyToken};
