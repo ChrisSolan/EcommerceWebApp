@@ -8,14 +8,15 @@ const { verifyToken } = require('./users.ts');
 //route to create an order, used whenever a shoppingItem is purchased in the frontend
 router.post('/', verifyToken, async (req: Request, res: Response) => {
     try {
-        const { shopperId, items } = req.body; //frontend must send both a shopperId and items in the body
+        const { shopperId, items, itemImg } = req.body; //frontend must send both a shopperId and items in the body
 
         const order = await prisma.order.create({
             data: {
                 shopper: { connect: { id: shopperId } }, // Connect the shopper (user) to the order
                 items: {
                     connect: items.map((item: { id: string }) => ({ id: item.id })) // iterates over all provided items via item ID and connects to each shoppingItem by their ID.
-                }
+                },
+                itemImg
             }
         });
         res.json(order);
@@ -42,7 +43,8 @@ router.get('/:userID', async (req: Request, res: Response) => {
     try {
         const orders = await prisma.order.findMany({
             where: {shopperId: req.params.userID},
-            include: { items: true }
+            include: { items: true },
+            orderBy: { createdAt: 'desc'}
         });
 
            // If no orders found...

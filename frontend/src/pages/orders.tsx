@@ -23,11 +23,12 @@ export const Orders = () => {
     
     return (
         <div>
-            <h1>Test Orders Page</h1>
+            <h1>Orders Page</h1>
             <ul>
                 {orders.length > 0  ?  (
                     orders.map(order => (
                         <li key={order.id}>
+                            <img src={order.itemImg} alt="Ordered Item"/>
                             <h2>Order ID: {order.id}</h2>
                             <h2>Order Placed: {order.createdAt}</h2>
                         </li>

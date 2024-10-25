@@ -13,6 +13,7 @@ export interface OrdersType {
     id: string;
     createdAt: string;
     shopperId: string;
+    itemImg: string;
 }
 
 //defines the types for states and functions included in the shopping context

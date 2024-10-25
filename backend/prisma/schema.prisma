@@ -26,6 +26,7 @@ model User {
 model Order {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
+  itemImg   String   @default("")
 
   shopper   User   @relation(fields: [shopperId], references: [id])
   shopperId String

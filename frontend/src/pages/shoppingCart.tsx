@@ -19,10 +19,12 @@ export const ShoppingCart = () => {
     const createOrder = async () => {
         //const { shopperId, items } = req.body; //frontend must send both a shopperId and items in the body
         const items =  cartItems;
+        const itemImg = items.length > 0 ? items[0].itemImg : null; //if the cart is empty, the itemImg is null
         try {
             await axios.post('http://localhost:3010/orders/', {
                 shopperId,
-                items
+                items,
+                itemImg
             }, {headers: { authorization: cookies.access_token } }
         );
         alert("Order Created!");
@@ -51,7 +53,12 @@ export const ShoppingCart = () => {
                 ))}
             </ul>
             <h3>Estimated Total: ${cartTotal}</h3>
-            <button onClick={() => createOrder()}>CHECKOUT</button>
+            { cartItems.length > 0 ? (
+                <button onClick={() => createOrder()}>CHECKOUT</button>
+                ) : (
+                    <p>Add items to your cart!</p>
+                )
+            }
         </div>
     )
 }
