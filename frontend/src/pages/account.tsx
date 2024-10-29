@@ -28,10 +28,10 @@ export const Account = () => {
     }
     */
     return (
-        <div>
+        <div className="flex-col text-center justify-center">
             
-            <h1>{username}'s Account Page</h1>
-            <button onClick={logout}>Logout</button>
+            <h1 className="mx-[15px] mb-3 font-bold text-lg">{username}'s Account Page</h1>
+            <button onClick={logout} className="rounded-md hover:bg-[#FFA69E] font-semibold my-4 px-[20px] py-[6px] text-black bg-[#FF686B]">Logout</button>
            
             
         </div>

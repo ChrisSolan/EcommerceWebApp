@@ -22,13 +22,12 @@ export const Orders = () => {
     }, []);
     
     return (
-        <div>
-            <h1>Orders Page</h1>
+        <div className="flex justify-center text-ce">
             <ul>
                 {orders.length > 0  ?  (
                     orders.map(order => (
-                        <li key={order.id}>
-                            <img src={order.itemImg} alt="Ordered Item"/>
+                        <li key={order.id} className="my-4">
+                            <img src={order.itemImg} alt="Ordered Item" className=' h-[200px] w-[200px] rounded-full object-cover'/>
                             <h2>Order ID: {order.id}</h2>
                             <h2>Order Placed: {order.createdAt}</h2>
                         </li>

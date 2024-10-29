@@ -39,22 +39,22 @@ export const ShoppingCart = () => {
     }
 
     return (
-        <div>
-            <h1>Shopping Cart: </h1>
-            <ul>
+        <div className="min-h-screen text-center py-[15px]">
+            <h1 className="mx-[15px] mb-3 font-bold text-lg">Shopping Cart: </h1>
+            <ul className='flex flex-col items-center my-[15px]'>
                 {cartItems.map(shoppingItem => (
-                    <li key={shoppingItem.id}>
-                        <img src={shoppingItem.itemImg} alt={shoppingItem.name}/>
+                    <li key={shoppingItem.id} className='my-[15px] flex items-center space-x-4 text-left'>
+                        <img src={shoppingItem.itemImg} alt={shoppingItem.name} className=' h-[150px] w-[150px] rounded-full object-cover'/>
                         <h2>{shoppingItem.name}</h2>
-                        <h3>${shoppingItem.price}</h3>
-                        <button onClick={() => handleRemove(shoppingItem.id)}>REMOVE FROM CART</button>
+                        <h3>${shoppingItem.dealPrice ?? shoppingItem.price}</h3> {/* Displays deal price if it exists */}
+                        <button onClick={() => handleRemove(shoppingItem.id)} className="rounded-full bg-[#FFA69E] font-semibold px-[20px] py-[6px] text-black hover:bg-[#FF686B]">REMOVE FROM CART</button>
 
                     </li>
                 ))}
             </ul>
             <h3>Estimated Total: ${cartTotal}</h3>
             { cartItems.length > 0 ? (
-                <button onClick={() => createOrder()}>CHECKOUT</button>
+                <button onClick={() => createOrder()} className="rounded-md hover:bg-[#FFA69E] font-semibold my-4 px-[20px] py-[6px] text-black bg-[#FF686B]">CHECKOUT</button>
                 ) : (
                     <p>Add items to your cart!</p>
                 )

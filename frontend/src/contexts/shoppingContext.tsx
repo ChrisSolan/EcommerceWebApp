@@ -47,17 +47,19 @@ export const ShoppingProvider = ({children}: {children: ReactNode}) => {
     const [cartItems, setCartItems] = useState<ShoppingItem[]>([]);
     const [cartTotal, setCartTotal] = useState(0);
     const addCart = (item: ShoppingItem) => {
+        const realPrice = item.dealPrice ?? item.price; //If theres a deal price, use that instead of the default price
         setCartItems(prevItems => [...prevItems, item]); //adds the new 'item' to the already existing array of items in the shopping cart
-        setCartTotal(cartTotal => cartTotal + item.price);
+        setCartTotal(cartTotal => cartTotal + realPrice);
         setCartTotal(cartTotal => Math.round(cartTotal * 100) / 100); //for rounding the decimals to 2 places
     }
 
 
     const removeCartItem = (cartItem: ShoppingItem) => {
+        const realPrice = cartItem.dealPrice ?? cartItem.price; //If theres a deal price, use that instead of the default price
         setCartItems(cartItems => {
             return cartItems.filter(item => item.id !== cartItem.id);
         });
-        setCartTotal( cartTotal => cartTotal - cartItem.price);
+        setCartTotal( cartTotal => cartTotal - realPrice);
         setCartTotal(cartTotal => Math.round(cartTotal * 100) / 100);
     }
 
