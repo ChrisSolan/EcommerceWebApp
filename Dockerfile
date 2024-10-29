@@ -4,7 +4,7 @@ WORKDIR /frontend
 COPY frontend/package*.json ./
 RUN npm install
 COPY frontend/ ./
-ENV REACT_APP_API_URL=https://ecommercewebapp-ui3j.onrender.com
+ENV REACT_APP_API_URL=https://ecommercewebapp-gbmr.onrender.com/
 RUN npm run build
 
 #Stage 2 is the backend
