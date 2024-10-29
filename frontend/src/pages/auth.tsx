@@ -42,7 +42,7 @@ const Login = () => {
     }
     
     return (
-        <div className='auth-container text-center bg-[#ACD7EC] items-center justify-center py-[15px]'>
+        <div className='auth-container text-center items-center justify-center py-[15px]'>
             <form onSubmit={onSubmit}>
                 <h2>Login</h2>
                 {errorMsg && <p className="text-red-500 mt-2">{errorMsg}</p>}
@@ -54,7 +54,7 @@ const Login = () => {
                     <label htmlFor='password'>Password: </label>
                     <input type='password' id='password' className='border-2 border-black' value={password} required onChange={(event) => setPassword(event.target.value)}/>
                 </div>
-                <button className='rounded-full bg-[#00798C] font-medium px-[18px] py-[6px] text-white' type='submit'>Login</button>
+                <button className="rounded-md hover:bg-[#FFA69E] font-semibold my-4 px-[20px] py-[6px] text-black bg-[#FF686B]" type='submit'>Login</button>
             </form>
         </div>
     );
@@ -79,7 +79,7 @@ const Register = () => {
     }
     
     return (
-        <div className='auth-container text-center bg-[#ACD7EC] min-h-screen justify-center'>
+        <div className='auth-container text-center min-h-screen justify-center'>
             <form onSubmit={onSubmit}>
                 <h2>Register</h2>
                 <div className='form-group py-[3px]'>
@@ -90,7 +90,7 @@ const Register = () => {
                     <label htmlFor='password'>Password: </label>
                     <input type='password' id='password' className='border-2 border-black' value={password} required maxLength={16} onChange={(event) => setPassword(event.target.value)}/>
                 </div>
-                <button className='rounded-full bg-[#00798C] font-medium px-[18px] py-[6px] text-white' type='submit'>Register</button>
+                <button className="rounded-md hover:bg-[#FFA69E] font-semibold my-4 px-[20px] py-[6px] text-black bg-[#FF686B]" type='submit'>Register</button>
             </form>
         </div>
     );
