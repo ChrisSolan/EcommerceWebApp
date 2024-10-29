@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
-import axios from "axios"
 import { OrdersType } from "../contexts/shoppingContext";
+import api from '../axiosConfig'
 
 export const Orders = () => {
     const [orders, setOrders] = useState<OrdersType[]>([]);
@@ -11,7 +11,8 @@ export const Orders = () => {
             try {
                 console.log("userID from localStorage:", userID);
 
-                const response = await axios.get(`http://localhost:3010/orders/${userID}`);
+                //const response = await axios.get(`http://localhost:3010/orders/${userID}`);  [REPLACED AXIOS WITH 'API']
+                const response = await api.get(`/${userID}`);
                 console.log("Response data: ", response.data);
                 setOrders(response.data);
             } catch (err) {

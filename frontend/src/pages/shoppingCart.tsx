@@ -2,6 +2,7 @@ import { useShoppingContext } from "../contexts/shoppingContext"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from 'react-cookie';
+import api from '../axiosConfig';
 
 export const ShoppingCart = () => {
     const { cartItems, removeCartItem, cartTotal, resetCart} = useShoppingContext();
@@ -21,7 +22,7 @@ export const ShoppingCart = () => {
         const items =  cartItems;
         const itemImg = items.length > 0 ? items[0].itemImg : null; //if the cart is empty, the itemImg is null
         try {
-            await axios.post('http://localhost:3010/orders/', {
+            await api.post('/orders', {
                 shopperId,
                 items,
                 itemImg

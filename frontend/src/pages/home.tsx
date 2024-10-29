@@ -1,7 +1,7 @@
 import { useState, useEffect} from "react"
 import { useCookies } from 'react-cookie';
-import axios from "axios"
 import { useShoppingContext, ShoppingItem } from "../contexts/shoppingContext"
+import api from "../axiosConfig";
 
 export const Home = () => {
     const { addCart } = useShoppingContext();
@@ -12,7 +12,7 @@ export const Home = () => {
     useEffect(() => {
         const fetchShoppingItems = async () => {
             try {
-                const response = await axios.get('http://localhost:3010/shoppingItems');
+                const response = await api.get('/shoppingItems');
                 setShoppingItems(response.data);
             } catch (err) {
                 console.log(err);
@@ -29,7 +29,7 @@ export const Home = () => {
                 return;
             }
             
-            await axios.put('http://localhost:3010/shoppingItems/cart', {
+            await api.put('/shoppingItems/cart', {
                 userID,
                 shoppingItemID 
             },

@@ -15,6 +15,11 @@ app.use('/auth', userRouter);
 app.use('/shoppingItems', shoppingItemsRouter);
 app.use('/orders', orderRouter);
 
+app.use(express.static(path.join(__dirname, '..', 'public'))); //Serves the static files provided from the build version of the React frontend
+app.get('*', (req: Request, res: Response) => {
+    res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
+}); 
+
 app.get('/', (req: Request, res: Response) => {
     res.status(200).json({message: "Hello World!"});
 });

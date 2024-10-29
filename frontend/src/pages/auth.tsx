@@ -1,7 +1,8 @@
 import {useState} from 'react';
-import axios, {AxiosError} from 'axios';
+import {AxiosError} from 'axios';
 import {useNavigate} from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import api from '../axiosConfig';
 
 export const Auth = () => {
     return (
@@ -24,7 +25,7 @@ const Login = () => {
         setErrorMsg('');
 
         try {
-            const response = await axios.post('http://localhost:3010/auth/login', {
+            const response = await api.post('/auth/login', {
                 username,
                 password,
             });
@@ -68,7 +69,7 @@ const Register = () => {
         event.preventDefault(); //allows us to submit the form without reloading the whole page
 
         try {
-            await axios.post('http://localhost:3010/auth/register', {
+            await api.post('/auth/register', {
                 username,
                 password,
             });
