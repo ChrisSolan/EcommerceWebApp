@@ -12,7 +12,7 @@ export const Orders = () => {
                 console.log("userID from localStorage:", userID);
 
                 //const response = await axios.get(`http://localhost:3010/orders/${userID}`);  [REPLACED AXIOS WITH 'API']
-                const response = await api.get(`/${userID}`);
+                const response = await api.get(`/orders/${userID}`);
                 console.log("Response data: ", response.data);
                 setOrders(response.data);
             } catch (err) {
