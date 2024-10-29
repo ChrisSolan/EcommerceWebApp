@@ -7,9 +7,8 @@ export const Navbar = () => {
     const {cartCount} = useShoppingContext();
 
     return (
-        <div className=''>
+        <div className='bg-[#FF686B] py-2 px-6 space-x-2 flex justify-end'>
             <Link to= "/" className=''>Home</Link>
-            <Link to="/deals" className=''>Deals</Link>
             <Link to="/cart" className=''>Cart ({cartCount})</Link>
             {cookies.access_token ?  (
                 <>
